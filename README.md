@@ -33,9 +33,9 @@ This sections displays all the transactions of the user along with date, descrip
 This is an interesting section of the nav bar which gives the user a monthly comparision of income and expenses as well as a financial health score along with feedback which helps the user understand his spending patterns. It also contains a top spending category along with suggestions on how he/she can improve savings.
 - Highest spending category highlight card
 - Monthly Comparison bar chart (this month vs last month)
-- Financial Health Score — circular gauge scored out of 100
+- Financial Health Score - circular gauge scored out of 100
   - Computed from: Savings Ratio (40%), Spending Consistency (30%), Budget Adherence (30%)
-  - Color zones: Red 0–40, Yellow 41–70, Green 71–100
+  - Color zones: Red 0–40, Amber 41–70, Green 71–100
   - One-line verdict: "Good financial health", "Overspending detected" etc.
 
 ### Budget Tracker
@@ -164,13 +164,20 @@ src/
 
 ## Screenshots
 
-DASHBOARD  
-TRANSACTIONS
-INSIGHTS
-BUDGETS
-GOALS
-SUBSCRIPTIONS
-INVESTMENTS
+DASHBOARD  <img width="1898" height="912" alt="Screenshot 2026-04-06 012648" src="https://github.com/user-attachments/assets/5ef55dd2-427e-4cff-b6e4-f7f1c43c38a5" />
+
+TRANSACTIONS <img width="1904" height="909" alt="Screenshot 2026-04-06 012841" src="https://github.com/user-attachments/assets/7078be46-2a5e-443e-ae54-147146f7993d" />
+
+INSIGHTS <img width="1913" height="914" alt="Screenshot 2026-04-06 012902" src="https://github.com/user-attachments/assets/6318818f-9b59-4ec4-86cd-75904a246748" />
+
+BUDGETS <img width="1914" height="909" alt="Screenshot 2026-04-06 012931" src="https://github.com/user-attachments/assets/d34db2cb-a239-4137-b96a-cb780f8f4c25" />
+
+GOALS <img width="1911" height="912" alt="Screenshot 2026-04-06 013004" src="https://github.com/user-attachments/assets/bd823d8f-33b9-43b7-b105-83abefa8815b" />
+
+SUBSCRIPTIONS <img width="1908" height="912" alt="Screenshot 2026-04-06 013025" src="https://github.com/user-attachments/assets/a1690027-cfc3-46c1-a4e0-74d6c4b84afb" />
+
+INVESTMENTS <img width="1907" height="908" alt="Screenshot 2026-04-06 013054" src="https://github.com/user-attachments/assets/8ad176f9-ec9c-462b-8f6c-630eaa03ff8d" />
+
 
 ## Author
 
