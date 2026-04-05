@@ -7,8 +7,9 @@ import Button from '../../components/UI/Button';
 import { Repeat, AlertCircle, TrendingDown, CheckCircle2, Plus } from 'lucide-react';
 
 const Subscriptions = () => {
-  const { subscriptions, addSubscription, cancelSubscription, role, isLoading, showToast } = useFinance();
+  const { subscriptions, addSubscription, cancelSubscription, deleteSubscription, role, isLoading, showToast } = useFinance();
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
   const [newSub, setNewSub] = useState({ name: '', amount: '', renewalDate: '', isUnused: false });
 
   const handleAddSubmit = (e) => {
@@ -89,7 +90,7 @@ const Subscriptions = () => {
              <p className="font-semibold">You can save <Amount value={potentialSavings} /> per month by cancelling inactive subscriptions.</p>
           </div>
           {role === 'Admin' && (
-            <Button variant="outline" className="border-orange-200 text-orange-700 hover:bg-orange-100 dark:border-orange-500/30 dark:text-orange-300 dark:hover:bg-orange-500/20 whitespace-nowrap">
+            <Button onClick={() => setShowReviewModal(true)} variant="outline" className="border-orange-200 text-orange-700 hover:bg-orange-100 dark:border-orange-500/30 dark:text-orange-300 dark:hover:bg-orange-500/20 whitespace-nowrap">
                Review Cancellations
             </Button>
           )}
@@ -100,11 +101,14 @@ const Subscriptions = () => {
         <div className="overflow-x-auto">
           {subscriptions.length === 0 ? (
             <div className="py-12 text-center flex flex-col items-center">
-              <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-3xl mb-4">
-                 ☕
+              <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-4xl mb-4">
+                 🔄
               </div>
-              <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 mb-1">No subscriptions yet!</h3>
-              <p className="text-slate-500">Add a subscription to start tracking your recurring expenses.</p>
+              <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-1">No subscriptions tracked</h3>
+              <p className="text-sm text-slate-400 mb-4">Add your recurring expenses to track monthly subscription costs</p>
+              {role === 'Admin' && (
+                 <Button variant="primary" onClick={() => setShowAddModal(true)}>+ Add Subscription</Button>
+              )}
             </div>
           ) : (
              <table className="w-full text-left border-collapse">
@@ -184,6 +188,47 @@ const Subscriptions = () => {
                   <Button type="submit" variant="primary">Add Subscription</Button>
                 </div>
              </form>
+          </Card>
+        </div>
+      )}
+
+      {/* Review Cancellations Modal */}
+      {showReviewModal && (
+        <div className="modal-overlay animate-in fade-in z-50">
+          <div className="absolute inset-0" onClick={() => setShowReviewModal(false)}></div>
+          <Card className="modal-card w-[90vw] md:w-full max-w-[480px] relative z-50 p-6 !bg-white dark:!bg-[#1E293B]">
+             <div className="flex justify-between items-center mb-6">
+               <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Subscriptions You Can Cancel</h2>
+               <button onClick={() => setShowReviewModal(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl font-medium leading-none">✕</button>
+             </div>
+             
+             {unusedSubscriptions.length === 0 ? (
+                <div className="py-8 text-center bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                  <p className="text-slate-500 dark:text-slate-400 font-medium">No inactive subscriptions found 🎉</p>
+                </div>
+             ) : (
+                <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                  {unusedSubscriptions.map(sub => {
+                    const monthlyCost = sub.isYearly ? sub.amount / 12 : sub.amount;
+                    return (
+                      <div key={sub.id} className="flex justify-between items-center bg-slate-50 dark:bg-slate-800 rounded-xl p-3 border border-slate-100 dark:border-slate-700/50">
+                         <div>
+                           <p className="font-semibold text-slate-800 dark:text-slate-100">{sub.name}</p>
+                           <p className="text-sm text-slate-500 dark:text-slate-400"><Amount value={monthlyCost} /> / month</p>
+                         </div>
+                         <div className="flex items-center gap-3">
+                           <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400">
+                             Inactive
+                           </span>
+                           <Button onClick={() => { deleteSubscription(sub.id); showToast('Subscription removed'); }} variant="ghost" className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 px-3 py-1.5 h-auto text-sm cursor-pointer">
+                             Cancel
+                           </Button>
+                         </div>
+                      </div>
+                    )
+                  })}
+                </div>
+             )}
           </Card>
         </div>
       )}

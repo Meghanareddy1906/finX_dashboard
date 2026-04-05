@@ -117,6 +117,18 @@ const Budgets = () => {
         )}
       </div>
 
+      {Object.keys(budgets).length === 0 ? (
+        <div className="py-12 text-center flex flex-col items-center">
+            <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-4xl mb-4">
+                📁
+            </div>
+            <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-1">No budgets set</h3>
+            <p className="text-sm text-slate-400 mb-4">Set a monthly budget for each category to track your spending</p>
+            {role === 'Admin' && (
+                <Button variant="primary" className="bg-amber-500 hover:bg-amber-600 border-none text-white !text-white" onClick={() => { setNewBudgetCat(CATEGORIES[0].name); setShowAddModal(true); }}>+ Set Your First Budget</Button>
+            )}
+        </div>
+      ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {categoryBudgetItems.map((item) => (
           <Card key={item.category} className="flex flex-col">
@@ -181,6 +193,7 @@ const Budgets = () => {
           </Card>
          ))}
       </div>
+      )}
 
       {/* Edit Budget Modal */}
       {editModalCategory && (

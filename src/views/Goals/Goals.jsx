@@ -72,6 +72,18 @@ const Goals = () => {
         )}
       </div>
 
+      {goals.length === 0 ? (
+        <div className="py-12 text-center flex flex-col items-center">
+            <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-4xl mb-4">
+                🎯
+            </div>
+            <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-1">No goals yet</h3>
+            <p className="text-sm text-slate-400 mb-4">Create a savings goal to start tracking your progress</p>
+            {role === 'Admin' && (
+                <Button variant="primary" onClick={() => setShowAddModal(true)}>+ Add Goal</Button>
+            )}
+        </div>
+      ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {enrichedGoals.map((goal) => (
           <Card key={goal.id} className="flex flex-col group">
@@ -109,6 +121,7 @@ const Goals = () => {
           </Card>
         ))}
       </div>
+      )}
 
       {/* Add Goal Modal */}
       {showAddModal && (

@@ -112,6 +112,26 @@ export const FinanceProvider = ({ children }) => {
     setSubscriptions(prev => prev.map(s => s.id === id ? { ...s, isUnused: true } : s));
   };
 
+  const deleteSubscription = (id) => {
+    setSubscriptions(prev => prev.filter(s => s.id !== id));
+  };
+
+  const resetToDemoData = () => {
+    setTransactions(generateMockTransactions(25));
+    setBudgets(MOCK_BUDGETS);
+    setGoals(MOCK_GOALS);
+    setSubscriptions(MOCK_SUBSCRIPTIONS);
+    setInvestments(MOCK_INVESTMENTS);
+  };
+
+  const clearAllData = () => {
+    setTransactions([]);
+    setBudgets({});
+    setGoals([]);
+    setSubscriptions([]);
+    setInvestments([]);
+  };
+
   const value = {
     theme, toggleTheme,
     privacyMode, togglePrivacy,
@@ -120,11 +140,11 @@ export const FinanceProvider = ({ children }) => {
     transactions,
     addTransaction, deleteTransaction, editTransaction,
     budgets, updateBudget,
-    goals, addGoal, subscriptions, addSubscription, cancelSubscription,
+    goals, addGoal, subscriptions, addSubscription, cancelSubscription, deleteSubscription,
     investments, addInvestment, investmentOptions,
     totalIncome, totalExpenses, totalBalance, savingsRate,
     formatAmount, isLoading, setIsLoading,
-    toastMessage, showToast
+    toastMessage, showToast, resetToDemoData, clearAllData
   };
 
   return (

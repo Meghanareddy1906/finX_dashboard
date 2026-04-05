@@ -149,13 +149,13 @@ const Transactions = () => {
         <div className="overflow-x-auto">
           {filteredTransactions.length === 0 ? (
             <div className="py-12 text-center flex flex-col items-center">
-              <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-3xl mb-4">
-                 🔍
+              <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-4xl mb-4">
+                 💳
               </div>
-              <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 mb-1">It's a bit quiet here...</h3>
-              <p className="text-slate-500">We couldn't track down any transactions.</p>
+              <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-1">No transactions yet</h3>
+              <p className="text-sm text-slate-400 mb-4">{role === 'Admin' ? 'Start by adding your first transaction' : 'No transactions have been recorded yet'}</p>
               {role === 'Admin' && (
-                <Button variant="outline" className="mt-4">Clear Filters</Button>
+                <Button variant="primary" onClick={() => setShowAddModal(true)}>+ Add Transaction</Button>
               )}
             </div>
           ) : (

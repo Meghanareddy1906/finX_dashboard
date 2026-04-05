@@ -76,8 +76,25 @@ const InvestmentHub = () => {
           <h1 className="text-2xl font-semibold mb-1 text-slate-700 dark:text-slate-100">📈 Investment Hub</h1>
           <p className="text-slate-500 dark:text-slate-400">Track portfolios and explore market opportunities.</p>
         </div>
+        {role === 'Admin' && (
+          <Button variant="primary" onClick={() => setShowAddModal(true)} className="gap-2">
+            <Plus size={16} /> Add Investment
+          </Button>
+        )}
       </div>
 
+      {investments.length === 0 ? (
+        <div className="py-12 text-center flex flex-col items-center">
+            <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-4xl mb-4">
+                📈
+            </div>
+            <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-1">No investments added</h3>
+            <p className="text-sm text-slate-400 mb-4">Start tracking your portfolio by adding your first investment</p>
+            {role === 'Admin' && (
+                <Button variant="primary" onClick={() => setShowAddModal(true)}>+ Add Investment</Button>
+            )}
+        </div>
+      ) : (
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card gradient="indigo">
@@ -235,6 +252,7 @@ const InvestmentHub = () => {
             })}
           </div>
         </div>
+      )}
 
       {/* Admin Add Investment Modal */}
       {showAddModal && (
