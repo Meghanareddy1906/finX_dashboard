@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-50: #f0f4f8;
+  --color-navy-100: #d9e2ec;
+  --color-navy-200: #bcccdc;
+  --color-navy-300: #9fb3c8;
+  --color-navy-400: #829ab1;
+  --color-navy-500: #627d98;
+  --color-navy-600: #486581;
+  --color-navy-700: #334e68;
+  --color-navy-800: #243b53;
+  --color-navy-900: #0b1d31;
+
+  --animate-ripple: ripple 0.6s linear;
+  
+  @keyframes ripple {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(40); opacity: 0; }
+  }
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 transition-colors duration-300 font-sans;
+  }
+  .dark body {
+    @apply bg-navy-900 text-slate-100;
+  }
+  
+  /* Modal Overlay */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center;
+  }
+}
+
+@layer utilities {
+  .privacy-blur {
+    @apply blur-[6px] select-none pointer-events-none transition-all duration-300;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg dark:bg-navy-800/80 dark:border-navy-700/50;
+  }
+}
