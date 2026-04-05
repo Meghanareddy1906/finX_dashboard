@@ -139,10 +139,12 @@ Use the **Admin / Viewer** toggle in the top navbar to switch roles.
 | Viewer | Read-only access to all sections |
 
 ## Project Structure
+```
 src/
-├── components/       # Reusable UI components (modals, cards, charts)
-├── context/          # Global state via Context API
-├── views/            # Section pages (Dashboard, Transactions, etc.)
+├── components/          # Reusable UI components (modals, cards, charts)
+├── context/             # Global state via Context API
+├── data/                # Mock data
+├── views/               # Section pages
 │   ├── Dashboard/
 │   ├── Transactions/
 │   ├── Insights/
@@ -150,8 +152,8 @@ src/
 │   ├── Goals/
 │   ├── Subscriptions/
 │   └── InvestmentHub/
-├── data/             # Mock data
-└── App.jsx           # Root component and routing
+└── App.jsx              # Root component and routing
+```
 
 
 ## Design Decisions
