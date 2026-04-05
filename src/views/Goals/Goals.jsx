@@ -72,7 +72,7 @@ const Goals = () => {
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {enrichedGoals.map((goal) => (
           <Card key={goal.id} className="flex flex-col group">
             <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-500 flex items-center justify-center mb-4">
@@ -114,7 +114,7 @@ const Goals = () => {
       {showAddModal && (
         <div className="modal-overlay animate-in fade-in z-50">
           <div className="absolute inset-0" onClick={() => setShowAddModal(false)}></div>
-          <Card className="modal-card w-full max-w-md relative z-50 p-6 m-4 !bg-white dark:!bg-[#1E293B]">
+          <Card className="modal-card w-[90vw] md:w-full max-w-[480px] relative z-50 p-6 !bg-white dark:!bg-[#1E293B]">
              <h2 className="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">Add New Goal</h2>
              <form onSubmit={handleAddSubmit} className="space-y-4">
                 <div>

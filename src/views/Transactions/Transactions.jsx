@@ -159,7 +159,9 @@ const Transactions = () => {
               )}
             </div>
           ) : (
-            <table className="w-full text-left border-collapse">
+            <>
+              {/* Desktop Table View */}
+              <table className="hidden md:table w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-700">
                   <th className="py-3 px-4 text-sm font-medium text-slate-500 dark:text-slate-400">Date</th>
@@ -215,7 +217,47 @@ const Transactions = () => {
                   </tr>
                 ))}
               </tbody>
-            </table>
+              </table>
+
+              {/* Mobile Stacked Card View */}
+              <div className="md:hidden flex flex-col gap-3 mt-4">
+                {filteredTransactions.map((txn, index) => (
+                  <div key={`mob-${txn.id}`} className="bg-white dark:bg-[#1E293B] rounded-xl p-4 border border-slate-100 dark:border-slate-700 shadow-sm animate-in fade-in slide-in-from-bottom-2" style={{ animationDelay: `${index * 50}ms` }}>
+                    <div className="flex justify-between items-start mb-2 relative z-10">
+                       <div>
+                         <p className="font-semibold text-slate-800 dark:text-slate-100 leading-tight">{txn.description}</p>
+                         <p className="text-xs text-slate-500 mt-1">{new Date(txn.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+                       </div>
+                       <Amount 
+                        value={txn.amount} 
+                        prefix={txn.type === 'income' ? '+' : '-'} 
+                        className={`font-semibold ${txn.type === 'income' ? 'text-emerald-500' : 'text-slate-800 dark:text-slate-200'}`}
+                      />
+                    </div>
+                    <div className="flex justify-between items-center mt-3 pt-3 border-t border-slate-50 dark:border-slate-700/50">
+                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300">
+                        {txn.category}
+                      </span>
+                      {role === 'Admin' && (
+                        <div className="flex gap-2">
+                          {deletingTxnId === txn.id ? (
+                            <div className="flex items-center gap-1">
+                              <button onClick={() => { deleteTransaction(txn.id); setDeletingTxnId(null); showToast("Deleted successfully"); }} className="px-3 py-1.5 text-xs font-bold text-white bg-red-500 rounded-lg hover:bg-red-600">Yes</button>
+                              <button onClick={() => setDeletingTxnId(null)} className="px-3 py-1.5 text-xs font-bold text-slate-600 bg-slate-200 rounded-lg dark:bg-slate-700 dark:text-slate-300">No</button>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-2">
+                              <button onClick={() => setEditModalTxn(txn)} className="p-2 text-slate-400 hover:text-indigo-500 bg-slate-50 dark:bg-slate-800 rounded-lg cursor-pointer"><Edit size={16} /></button>
+                              <button onClick={() => setDeletingTxnId(txn.id)} className="p-2 text-slate-400 hover:text-red-500 bg-slate-50 dark:bg-slate-800 rounded-lg cursor-pointer"><Trash2 size={16} /></button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </Card>
@@ -224,7 +266,7 @@ const Transactions = () => {
       {showAddModal && (
         <div className="modal-overlay animate-in fade-in z-50">
           <div className="absolute inset-0" onClick={() => setShowAddModal(false)}></div>
-          <Card className="modal-card w-full max-w-md relative z-50 p-6 m-4 !bg-white dark:!bg-[#1E293B]">
+          <Card className="modal-card w-[90vw] md:w-full max-w-[480px] relative z-50 p-6 !bg-white dark:!bg-[#1E293B]">
              <h2 className="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">Add New Transaction</h2>
              <form onSubmit={handleAddSubmit} className="space-y-4">
                 <div>
@@ -276,7 +318,7 @@ const Transactions = () => {
       {editModalTxn && (
         <div className="modal-overlay animate-in fade-in z-50">
           <div className="absolute inset-0" onClick={() => setEditModalTxn(null)}></div>
-          <Card className="modal-card w-full max-w-md relative z-50 p-6 m-4 !bg-white dark:!bg-[#1E293B]">
+          <Card className="modal-card w-[90vw] md:w-full max-w-[480px] relative z-50 p-6 !bg-white dark:!bg-[#1E293B]">
              <h2 className="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">Edit Transaction</h2>
              <form onSubmit={handleEditSubmit} className="space-y-4">
                 <div>

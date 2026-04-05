@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   LayoutDashboard, 
   ArrowLeftRight, 
@@ -7,10 +7,19 @@ import {
   Target, 
   Repeat,
   Briefcase,
-  Settings
+  Settings,
+  X
 } from 'lucide-react';
 
-const Sidebar = ({ currentView, setCurrentView }) => {
+const Sidebar = ({ currentView, setCurrentView, isOpen, onClose }) => {
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape' && onClose) onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
+
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'transactions', label: 'Transactions', icon: ArrowLeftRight },
@@ -23,15 +32,29 @@ const Sidebar = ({ currentView, setCurrentView }) => {
 
   return (
     <>
-      <aside className="hidden md:flex flex-col w-64 h-full border-r border-[rgba(255,255,255,0.08)]" style={{ background: 'linear-gradient(180deg, #1e1b4b 0%, #1e293b 100%)' }}>
-        <div className="p-6 flex items-center gap-3 border-b border-[rgba(255,255,255,0.08)] mb-4">
-          <div className="w-8 h-8 rounded-lg bg-[#4F46E5] flex items-center justify-center text-white font-bold text-sm tracking-tight shadow-md">
-            FX
+      {/* Mobile Overlay */}
+      <div 
+        className={`md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-50 transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+        onClick={onClose}
+      />
+
+      <aside 
+        className={`fixed md:static inset-y-0 left-0 z-[100] flex flex-col w-[280px] md:w-64 h-full border-r border-[rgba(255,255,255,0.08)] transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`} 
+        style={{ background: 'linear-gradient(180deg, #1e1b4b 0%, #1e293b 100%)' }}
+      >
+        <div className="p-6 flex items-center justify-between border-b border-[rgba(255,255,255,0.08)] mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#4F46E5] flex items-center justify-center text-white font-bold text-sm tracking-tight shadow-md">
+              FX
+            </div>
+            <div className="flex items-baseline">
+              <span className="font-bold text-xl tracking-tight text-white">Fin</span>
+              <span className="font-bold text-xl tracking-tight text-indigo-400">X</span>
+            </div>
           </div>
-          <div className="flex items-baseline">
-            <span className="font-bold text-xl tracking-tight text-white">Fin</span>
-            <span className="font-bold text-xl tracking-tight text-indigo-400">X</span>
-          </div>
+          <button onClick={onClose} className="md:hidden text-slate-400 hover:text-white transition">
+            <X size={24} />
+          </button>
         </div>
         
         <nav className="flex-1 px-4 space-y-1 mt-4">
@@ -68,23 +91,6 @@ const Sidebar = ({ currentView, setCurrentView }) => {
         </div>
       </aside>
 
-      {/* Mobile Bottom Tab Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#F3F0EB] dark:bg-[#0B1120] border-t border-[#E5E0D8] dark:border-[#0F172A] flex justify-around items-center px-2 z-40 pb-safe">
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => setCurrentView(item.id)}
-            className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${
-              currentView === item.id 
-                ? 'text-indigo-600 dark:text-indigo-400 border-t-2 border-indigo-500' 
-                : 'text-slate-500 dark:text-slate-400 border-t-2 border-transparent'
-            }`}
-          >
-            <item.icon size={20} />
-            <span className="text-[10px] font-medium">{item.label}</span>
-          </button>
-        ))}
-      </div>
     </>
   );
 };

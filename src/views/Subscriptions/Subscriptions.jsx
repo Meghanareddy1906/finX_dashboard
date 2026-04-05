@@ -158,7 +158,7 @@ const Subscriptions = () => {
       {showAddModal && (
         <div className="modal-overlay animate-in fade-in z-50">
           <div className="absolute inset-0" onClick={() => setShowAddModal(false)}></div>
-          <Card className="modal-card w-full max-w-md relative z-50 p-6 m-4 !bg-white dark:!bg-[#1E293B]">
+          <Card className="modal-card w-[90vw] md:w-full max-w-[480px] relative z-50 p-6 !bg-white dark:!bg-[#1E293B]">
              <h2 className="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">Add New Subscription</h2>
              <form onSubmit={handleAddSubmit} className="space-y-4">
                 <div>

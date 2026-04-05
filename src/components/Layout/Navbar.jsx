@@ -2,10 +2,10 @@ import React from 'react';
 import { useFinance } from '../../context/FinanceContext';
 import { 
   Building2, User, UserCog, Users, 
-  Sun, Moon, Eye, EyeOff, Bell
+  Sun, Moon, Eye, EyeOff, Bell, Menu
 } from 'lucide-react';
 
-const Navbar = ({ currentView = 'dashboard' }) => {
+const Navbar = ({ currentView = 'dashboard', onMenuClick }) => {
   const { 
     role, setRole,
     theme, toggleTheme,
@@ -18,9 +18,14 @@ const Navbar = ({ currentView = 'dashboard' }) => {
   return (
     <nav className="h-[56px] flex items-center justify-between px-6 bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-sm border-b border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] sticky top-0 z-30">
       
-      {/* Mobile Title */}
-      <div className="md:hidden font-bold text-xl text-slate-800 dark:text-slate-100 flex items-center gap-2">
-        <div className="w-8 h-8 rounded-lg bg-[#4F46E5] flex items-center justify-center text-white text-sm">FX</div>
+      {/* Mobile Title & Menu */}
+      <div className="md:hidden flex items-center gap-3 font-bold text-xl text-slate-800 dark:text-slate-100">
+        <button onClick={onMenuClick} className="p-1 rounded text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition" aria-label="Open menu">
+          <Menu size={24} />
+        </button>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-[#4F46E5] flex items-center justify-center text-white text-sm">FX</div>
+        </div>
       </div>
 
       {/* Desktop Breadcrumb */}

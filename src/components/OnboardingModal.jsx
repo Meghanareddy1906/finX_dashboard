@@ -27,7 +27,7 @@ const OnboardingModal = () => {
           <div className="text-center">
             {step === 1 && (
               <>
-                <h2 className="text-2xl font-bold mb-2">Welcome to Vaulto</h2>
+                <h2 className="text-2xl font-bold mb-2">Welcome to FinX</h2>
                 <p className="text-slate-500 dark:text-slate-400">Track your finances easily with stunning visualizations and powerful tools.</p>
               </>
             )}

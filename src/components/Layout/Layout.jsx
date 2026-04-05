@@ -15,12 +15,17 @@ import { useFinance } from '../../context/FinanceContext';
 
 const Layout = () => {
   const [currentView, setCurrentView] = useState('dashboard');
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const { toastMessage, setIsLoading } = useFinance();
 
   const handleNav = (view) => {
-    if (view === currentView) return;
+    if (view === currentView) {
+      setIsMobileDrawerOpen(false);
+      return;
+    }
     setIsLoading(true);
     setCurrentView(view);
+    setIsMobileDrawerOpen(false);
     setTimeout(() => setIsLoading(false), 400); // Navigation skeleton UI
   };
 
@@ -38,15 +43,23 @@ const Layout = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[#FAF7F2] dark:bg-[#0F172A] overflow-hidden font-sans transition-colors duration-300">
-      <Sidebar currentView={currentView} setCurrentView={handleNav} />
+    <div className="flex h-screen bg-[#FAF7F2] dark:bg-[#0F172A] overflow-hidden font-sans transition-colors duration-300 w-full">
+      <Sidebar 
+        currentView={currentView} 
+        setCurrentView={handleNav} 
+        isOpen={isMobileDrawerOpen} 
+        onClose={() => setIsMobileDrawerOpen(false)} 
+      />
       
-      <div className="flex-1 flex flex-col h-full relative">
-        <Navbar currentView={currentView} />
+      <div className="flex-1 flex flex-col h-full w-full relative min-w-0">
+        <Navbar 
+          currentView={currentView} 
+          onMenuClick={() => setIsMobileDrawerOpen(true)} 
+        />
         
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-24 md:pb-8 relative">
-          <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 relative w-full">
+          <div className="w-full max-w-full mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
             {renderView()}
           </div>
         </main>

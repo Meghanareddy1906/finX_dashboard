@@ -111,7 +111,7 @@ const Dashboard = () => {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {summaryCards.map((card, index) => (
           <Card key={index} className={`flex flex-col ${card.borderTop}`} gradient="none" isSmall={true}>
             <div className="flex items-center gap-4 mb-4">
@@ -134,10 +134,10 @@ const Dashboard = () => {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="flex flex-col lg:flex-row gap-6">
         
         {/* Line Chart */}
-        <Card title="Balance Trend" className="lg:col-span-2">
+        <Card title="Balance Trend" className="w-full lg:w-2/3">
           <div className="h-72 mt-4">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={trendData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -181,7 +181,7 @@ const Dashboard = () => {
         </Card>
 
         {/* Donut Chart */}
-        <Card title="Spending by Category" className="flex flex-col h-full">
+        <Card title="Spending by Category" className="flex flex-col h-full w-full lg:w-1/3">
           <div className="h-48 mt-2 flex shrink-0 items-center justify-center relative">
             <ResponsiveContainer width="100%" height="100%">
               <RechartsPie>
