@@ -48,14 +48,14 @@ This section is helpful for monitoring monthly budgets. The user can set a budge
 - Amber "+ Set Budget" for unset categories
 
 ### Savings Goals
-This is an interesting feature that FinX provides. This basically allows the user to set goals (e.g; busing an iphone, planning a vacation) along with target amount and target month and FinX will calculate the amount that has to be saved each month till the target month to be able to complete the goal. It monitors the progress towards the goal. A new goal can be added using the "add goal" feature.
+This is an interesting feature that FinX provides. This basically allows the user to set goals (e.g; buying an iphone, planning a vacation) along with target amount and target month and FinX will calculate the amount that has to be saved each month till the target month to be able to complete the goal. It monitors the progress towards the goal. A new goal can be added using the "add goal" feature.
 - Create goals with name, target amount, and deadline
 - Progress bars per goal
 - Auto-calculates estimated months to reach goal
 - Pre-filled example goals: Trip to Goa, Emergency Fund
 
 ### Subscription Tracker
-Subsriptions are hidden expenses that are auto debited every month and are often ignored. This section tracks the users subscriptions and also displays all the subscriptions along with the montly cost. Cancel option is provided for active subscriptions. Potentional monthly savings will also be displayed at the top. New subscriptions can be added using "add subscription" option.
+Subscriptions are hidden expenses that are auto debited every month and are often ignored. This section tracks the users subscriptions and also displays all the subscriptions along with the monthly cost. Cancel option is provided for active subscriptions. Potential monthly savings will also be displayed at the top. New subscriptions can be added using "add subscription" option.
 - List of recurring subscriptions with billing cycle and monthly cost
 - Cancel subscriptions - status updates reactively
 - Total monthly subscription spend summary
