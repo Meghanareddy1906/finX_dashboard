@@ -6,7 +6,7 @@ import Amount from '../../components/UI/Amount';
 import { Wallet, TrendingUp, TrendingDown, PiggyBank, Lightbulb } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart as RechartsPie, Pie, Cell, Area, AreaChart } from 'recharts';
 
-const Dashboard = () => {
+const Dashboard = ({ setCurrentView }) => {
   const { 
     totalIncome, totalExpenses, totalBalance, savingsRate, 
     transactions, isLoading, theme
@@ -88,6 +88,18 @@ const Dashboard = () => {
   const travelSpend = currentMonthTxns.filter(t => t.category === 'Travel').reduce((sum, t) => sum + t.amount, 0);
   const highestSpend = Object.entries(expensesByCategory).sort((a,b) => b[1] - a[1])[0] || ['Unknown'];
   
+  const recentTransactions = [...transactions].sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+
+  const getRelativeTime = (dateStr) => {
+    const rDate = new Date(dateStr);
+    const today = new Date();
+    const diffTime = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(rDate.getFullYear(), rDate.getMonth(), rDate.getDate());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    if (diffDays === 0) return "Today";
+    if (diffDays === 1) return "Yesterday";
+    return `${diffDays} days ago`;
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
@@ -243,6 +255,44 @@ const Dashboard = () => {
         </Card>
 
       </div>
+      
+      {/* Recent Activity */}
+      <div className="mt-6 animate-in fade-in slide-in-from-bottom-6 duration-700">
+        <Card className="flex flex-col h-full w-full">
+           <div className="flex justify-between items-center mb-4">
+             <h3 className="font-semibold text-lg text-slate-800 dark:text-slate-100">Recent Activity</h3>
+             <button onClick={() => setCurrentView && setCurrentView('transactions')} className="text-sm font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 flex items-center gap-1 transition-colors">
+                View All <span aria-hidden="true">→</span>
+             </button>
+           </div>
+           
+           <div className="space-y-4">
+             {recentTransactions.length === 0 ? (
+                <div className="py-6 text-center text-slate-500 dark:text-slate-400 font-medium">
+                  No recent activity yet
+                </div>
+             ) : (
+                recentTransactions.map((txn, idx) => (
+                  <div key={idx} className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50 transition border border-transparent dark:border-slate-800/50 hover:border-slate-100 dark:hover:border-slate-700">
+                     <div className="flex items-center gap-4 min-w-0">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 text-lg shrink-0">
+                           {txn.category === 'Food' ? '🍔' : txn.category === 'Travel' ? '✈️' : txn.category === 'Entertainment' ? '🎬' : txn.category === 'Utilities' ? '💡' : '📦'}
+                        </div>
+                        <div className="min-w-0 pr-2">
+                          <p className="font-semibold text-sm text-slate-800 dark:text-slate-100 truncate">{txn.description}</p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">{getRelativeTime(txn.date)}</p>
+                        </div>
+                     </div>
+                     <span className={`font-bold text-sm shrink-0 whitespace-nowrap ${txn.type === 'income' ? 'text-emerald-500' : 'text-slate-800 dark:text-slate-100'}`}>
+                        {txn.type === 'income' ? '+' : '-'}<Amount value={txn.amount} />
+                     </span>
+                  </div>
+                ))
+             )}
+           </div>
+        </Card>
+      </div>
+
     </div>
   );
 };

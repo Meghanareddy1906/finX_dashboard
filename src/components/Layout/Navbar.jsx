@@ -109,13 +109,13 @@ const Navbar = ({ currentView = 'dashboard', onMenuClick }) => {
           </button>
 
           {isNotifOpen && (
-            <div className="absolute right-0 mt-3 w-[320px] bg-white dark:bg-[#1E293B] rounded-2xl shadow-[0_25px_50px_rgba(0,0,0,0.15)] ring-1 ring-slate-900/5 dark:ring-white/10 z-50 overflow-hidden animate-in fade-in slide-in-from-top-2">
+            <div className="fixed md:absolute top-[56px] md:top-auto left-0 right-0 md:left-auto md:right-0 md:mt-3 w-full md:w-[320px] bg-white dark:bg-[#1E293B] md:rounded-2xl shadow-[0_25px_50px_rgba(0,0,0,0.15)] border-b md:border border-slate-100 dark:border-slate-800 ring-1 ring-slate-900/5 dark:ring-white/10 z-50 overflow-hidden animate-in fade-in slide-in-from-top-2">
               <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700/50 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30">
                 <h3 className="font-semibold text-slate-800 dark:text-slate-100">Notifications</h3>
                 {unreadCount > 0 && <span className="text-xs bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400 px-2 py-0.5 rounded-full font-medium">{unreadCount} New</span>}
               </div>
               
-              <div className="max-h-[320px] overflow-y-auto">
+              <div className="max-h-[60vh] overflow-y-auto">
                 {notifications.length === 0 ? (
                   <div className="py-12 flex flex-col items-center justify-center text-center">
                     <span className="text-4xl mb-3">✅</span>

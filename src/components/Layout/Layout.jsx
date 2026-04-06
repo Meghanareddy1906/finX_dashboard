@@ -31,7 +31,7 @@ const Layout = () => {
 
   const renderView = () => {
     switch (currentView) {
-      case 'dashboard': return <Dashboard />;
+      case 'dashboard': return <Dashboard setCurrentView={handleNav} />;
       case 'transactions': return <Transactions />;
       case 'insights': return <Insights />;
       case 'budgets': return <Budgets />;
