@@ -11,15 +11,16 @@ A modern, feature-rich finance dashboard that helps in managing and tracking one
 FinX is a single-page React application that simulates a personal finance dashboard for a fintech product. It was built with the goal of demonstrating UI design quality, component architecture, state management, and user experience thinking.
 The app is designed to feel like a real fintech SaaS product, not a basic template with attention to visual hierarchy, smooth interactions, and thoughtful edge case handling.
 
-## FEATURES
+## Features
 
 ### Dashboard Overview
-This is the first section of the side navigation bar. It gives an overall view of the user's balance, income, expenses, savings etc along with a visual representation of account balance in the last three months and a donut chart representing category-wise spending. A small summary card of smart insights can also be seen at the top.
+This is the first section of the side navigation bar. It gives an overall view of the user's balance, income, expenses, savings etc along with a visual representation of account balance in the last three months and a donut chart representing category-wise spending. A small summary card of smart insights can also be seen at the top. It also displays a recent activity section which shows the last 5 transactions performed by the user.
 - Summary cards: Total Balance, Monthly Income, Monthly Expenses, Savings Rate
 - Animated number counters on load
 - Balance Trend line chart (3 months)
 - Spending by Category donut chart with legend
 - Smart Insights card with dynamic data-driven observations
+- Recent Activity feed showing 5 most recent transactions
 
 ### Transactions
 This sections displays all the transactions of the user along with date, description, amount etc. This is very helpful in tracking daily expenses. The actions feature provides an edit and delete option. This helps the user to keep a track on when and where the money is going. New transactions can be added using the "add transaction" option.
@@ -95,7 +96,7 @@ This is a unique section that displays a user's investments in one place. It sho
 ## Tech Stack
 
 | Technology | Purpose |
-
+|---|---|
 | React (Vite) | Frontend framework |
 | Tailwind CSS | Styling and responsive design |
 | Recharts | All data visualizations |
@@ -134,7 +135,7 @@ npm run build
 Use the **Admin / Viewer** toggle in the top navbar to switch roles.
 
 | Role | Permissions |
-
+|---|---|
 | Admin | Add, edit, delete transactions, set budgets, manage goals, export data |
 | Viewer | Read-only access to all sections |
 
@@ -166,21 +167,39 @@ src/
 
 ## Screenshots
 
-DASHBOARD  <img width="1898" height="912" alt="Screenshot 2026-04-06 012648" src="https://github.com/user-attachments/assets/5ef55dd2-427e-4cff-b6e4-f7f1c43c38a5" />
+DASHBOARD  
 
-TRANSACTIONS <img width="1904" height="909" alt="Screenshot 2026-04-06 012841" src="https://github.com/user-attachments/assets/7078be46-2a5e-443e-ae54-147146f7993d" />
+<img width="1898" height="912" alt="Screenshot 2026-04-06 012648" src="https://github.com/user-attachments/assets/5ef55dd2-427e-4cff-b6e4-f7f1c43c38a5" />
 
-INSIGHTS <img width="1913" height="914" alt="Screenshot 2026-04-06 012902" src="https://github.com/user-attachments/assets/6318818f-9b59-4ec4-86cd-75904a246748" />
+TRANSACTIONS 
 
-BUDGETS <img width="1914" height="909" alt="Screenshot 2026-04-06 012931" src="https://github.com/user-attachments/assets/d34db2cb-a239-4137-b96a-cb780f8f4c25" />
+<img width="1904" height="909" alt="Screenshot 2026-04-06 012841" src="https://github.com/user-attachments/assets/7078be46-2a5e-443e-ae54-147146f7993d" />
 
-GOALS <img width="1911" height="912" alt="Screenshot 2026-04-06 013004" src="https://github.com/user-attachments/assets/bd823d8f-33b9-43b7-b105-83abefa8815b" />
+INSIGHTS 
 
-SUBSCRIPTIONS <img width="1908" height="912" alt="Screenshot 2026-04-06 013025" src="https://github.com/user-attachments/assets/a1690027-cfc3-46c1-a4e0-74d6c4b84afb" />
+<img width="1913" height="914" alt="Screenshot 2026-04-06 012902" src="https://github.com/user-attachments/assets/6318818f-9b59-4ec4-86cd-75904a246748" />
 
-INVESTMENTS <img width="1907" height="908" alt="Screenshot 2026-04-06 013054" src="https://github.com/user-attachments/assets/8ad176f9-ec9c-462b-8f6c-630eaa03ff8d" />
+BUDGETS 
 
+<img width="1914" height="909" alt="Screenshot 2026-04-06 012931" src="https://github.com/user-attachments/assets/d34db2cb-a239-4137-b96a-cb780f8f4c25" />
 
+GOALS 
+
+<img width="1911" height="912" alt="Screenshot 2026-04-06 013004" src="https://github.com/user-attachments/assets/bd823d8f-33b9-43b7-b105-83abefa8815b" />
+
+SUBSCRIPTIONS 
+
+<img width="1908" height="912" alt="Screenshot 2026-04-06 013025" src="https://github.com/user-attachments/assets/a1690027-cfc3-46c1-a4e0-74d6c4b84afb" />
+
+INVESTMENTS 
+
+<img width="1907" height="908" alt="Screenshot 2026-04-06 013054" src="https://github.com/user-attachments/assets/8ad176f9-ec9c-462b-8f6c-630eaa03ff8d" />
+
+## Known Limitations
+- All data is mock/static, no real backend integration
+- Investment sparklines use simplified mock trend data
+- Dark mode may have minor inconsistencies on some chart tooltips
+  
 ## Author
 
 **Meghana Reddy**
